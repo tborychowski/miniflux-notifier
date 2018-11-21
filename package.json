@@ -1,0 +1,35 @@
+{
+  "name": "miniflux-notifier",
+  "productName": "Miniflux Notifier",
+  "version": "1.0.0",
+  "description": "Miniflux notifier menubar app",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tborychowski/miniflux-notifier.git"
+  },
+  "scripts": {
+    "postinstall": "electron-builder install-app-deps",
+    "start": "electron index.js",
+    "build": "build --mac",
+    "release": "build --mac --publish always"
+  },
+  "author": "Tom",
+  "license": "GPL-3.0-or-later",
+  "build": {
+    "appId": "com.electron.miniflux-notifier",
+    "mac": {
+      "category": "public.app-category.mail"
+    },
+    "publish": [
+      "github"
+    ]
+  },
+  "dependencies": {
+    "electron-store": "^2.0.0"
+  },
+  "devDependencies": {
+    "electron": "3.0.8",
+    "electron-builder": "~20.34.0"
+  }
+}
