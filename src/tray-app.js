@@ -20,8 +20,7 @@ function toast (news)  {
 	const title = news.feed.title;
 	const subtitle = timeAgo(new Date(news.published_at));
 	const body = news.title;
-	// const icon = `${url}/feed/icon/${news.feed.icon.icon_id}`;
-	const notif = new Notification({ title, subtitle, body });
+	const notif = new Notification({ title, subtitle, body, silent: true });
 	notif.on('click', inbox);
 	notif.show();
 }
@@ -72,11 +71,14 @@ function timeAgo (date) {
 		{ label: 'day', seconds: 86400 },
 		{ label: 'hour', seconds: 3600 },
 		{ label: 'minute', seconds: 60 },
-		{ label: 'second', seconds: 0 }
+		{ label: 'second', seconds: 0 },
+		{ label: 'just now', seconds: -1 },
 	];
-	const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
+	const diff = Math.max(0, Date.now() - date.getTime());
+	const seconds = Math.floor(diff / 1000);
 	const interval = intervals.find(i => i.seconds < seconds);
-	const count = Math.floor(seconds / interval.seconds);
+	if (interval.seconds === -1) return interval.label;
+	const count = Math.floor(seconds / interval.seconds) || 0;
 	return `${count} ${interval.label}${count !== 1 ? 's' : ''} ago`;
 }
 

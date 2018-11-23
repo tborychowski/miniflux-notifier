@@ -18,3 +18,6 @@ cd miniflux-notifier
 yarn
 yarn start
 ```
+
+### Inspired by
+https://github.com/miniflux/miniflux-python

@@ -11,7 +11,8 @@ function refresh () {
 
 function updateCounter (res) {
 	setCount(res.count);
-	if (res.count > newsCount) notify(res.entries);
+	const news = res.count - newsCount;
+	if (news > 0) notify(res.entries.slice(0, news));
 	newsCount = res.count;
 	const freq = (parseFloat(settings.get().freq) || 5) * 60000;  // 60000 = 1 min
 	setTimeout(refresh, freq);
